@@ -1,0 +1,24 @@
+# See https://docs.ansible.com/ansible/latest/dev_guide/collections_galaxy_meta.html
+
+namespace: daniel_lynch
+name: passbolt
+version: 0.1.1
+readme: README.md
+authors:
+  - Daniel Lynch (github.com/daniel-lynch)
+description: Ansible Collection to interact with Passbolt from Ansible. 
+license_file: LICENSE
+tags:
+# tags so people can search for collections https://galaxy.ansible.com/search
+# tags are all lower-case, no spaces, no dashes.
+  - passbolt
+  - password
+  - passwords
+repository: https://github.com/daniel-lynch/passbolt
+#documentation: https://github.com/ansible-collection-migration/community.REPO_NAME/tree/main/docs
+homepage: https://github.com/daniel-lynch/passbolt
+issues: https://github.com/daniel-lynch/passbolt/issues
+build_ignore:
+# https://docs.ansible.com/ansible/devel/dev_guide/developing_collections.html#ignoring-files-and-folders
+  - .gitignore
+  - changelogs/.plugin-cache.yaml

@@ -1,0 +1,32 @@
+---
+- name: Create Group
+  daniel_lynch.passbolt.create_group:
+    passbolt_uri: "{{ passbolt_uri }}"
+    gpgkey: "{{ gpgkey }}"
+    passphrase: "{{ passphrase }}"
+    name: "Test"
+    admins:
+      - "{{ admin }}"
+    users:
+      - "{{ user }}"
+  delegate_to: localhost
+
+- name: Update Group
+  daniel_lynch.passbolt.update_group:
+    passbolt_uri: "{{ passbolt_uri }}"
+    gpgkey: "{{ gpgkey }}"
+    passphrase: "{{ passphrase }}"
+    name: "Test"
+    admins:
+      - "{{ admin2 }}"
+    users:
+      - "{{ user2 }}"
+  delegate_to: localhost
+
+- name: Delete Group
+  daniel_lynch.passbolt.delete_group:
+    passbolt_uri: "{{ passbolt_uri }}"
+    gpgkey: "{{ gpgkey }}"
+    passphrase: "{{ passphrase }}"
+    name: "Test"
+  delegate_to: localhost

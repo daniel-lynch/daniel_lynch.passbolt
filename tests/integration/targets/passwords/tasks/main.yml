@@ -1,0 +1,49 @@
+---
+- name: Create Password
+  daniel_lynch.passbolt.create_password:
+    passbolt_uri: "{{ passbolt_uri }}"
+    gpgkey: "{{ gpgkey }}"
+    passphrase: "{{ passphrase }}"
+    name: "Testing"
+    password: "password"
+    username: "Test"
+    uri: "test.com"
+    description: "This is a description"
+  delegate_to: localhost
+
+- name: Update Password
+  daniel_lynch.passbolt.update_password:
+    passbolt_uri: "{{ passbolt_uri }}"
+    gpgkey: "{{ gpgkey }}"
+    passphrase: "{{ passphrase }}"
+    name: "Testing"
+    password: "password"
+    username: "Test"
+    newname: "Testing2"
+    newusername: "Test2"
+    uri: "test2.com"
+    description: "This is a description2"
+  delegate_to: localhost
+
+- name: Share Password
+  daniel_lynch.passbolt.share_password:
+    passbolt_uri: "{{ passbolt_uri }}"
+    gpgkey: "{{ gpgkey }}"
+    passphrase: "{{ passphrase }}"
+    name: "Testing"
+    users:
+      - "{{ admin2 }}"
+    groups:
+      - Users
+    permission: Read
+    username: "Test"
+  delegate_to: localhost
+
+- name: Delete Password
+  daniel_lynch.passbolt.delete_password:
+    passbolt_uri: "{{ passbolt_uri }}"
+    gpgkey: "{{ gpgkey }}"
+    passphrase: "{{ passphrase }}"
+    name: "Testing"
+    username: "Test"
+  delegate_to: localhost

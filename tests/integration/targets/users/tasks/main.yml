@@ -1,0 +1,30 @@
+---
+- name: Create User
+  daniel_lynch.passbolt.create_user:
+    passbolt_uri: "{{ passbolt_uri }}"
+    gpgkey: "{{ gpgkey }}"
+    passphrase: "{{ passphrase }}"
+    username: "testing@example.com"
+    firstname: "Test"
+    lastname: "Ing"
+    admin: True
+  delegate_to: localhost
+
+- name: Update User
+  daniel_lynch.passbolt.update_user:
+    passbolt_uri: "{{ passbolt_uri }}"
+    gpgkey: "{{ gpgkey }}"
+    passphrase: "{{ passphrase }}"
+    username: "testing@example.com"
+    firstname: "Test"
+    lastname: "Ing"
+    admin: True
+  delegate_to: localhost
+
+- name: Delete User
+  daniel_lynch.passbolt.delete_user:
+    passbolt_uri: "{{ passbolt_uri }}"
+    gpgkey: "{{ gpgkey }}"
+    passphrase: "{{ passphrase }}"
+    username: "testing@example.com"
+  delegate_to: localhost
