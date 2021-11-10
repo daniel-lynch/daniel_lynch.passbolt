@@ -12,7 +12,7 @@ Ansible Collection to allow Passbolt managment from Ansible.
 - hosts: localhost
   tasks:
     - name: Create User
-    daniel_lynch.passbolt.create_user:
+      daniel_lynch.passbolt.create_user:
         passbolt_uri: "{{ passbolt_uri }}"
         gpgkey: "{{ gpgkey }}"
         passphrase: "{{ passphrase }}"
@@ -28,7 +28,7 @@ Ansible Collection to allow Passbolt managment from Ansible.
 - hosts: localhost
   tasks:
     - name: Update User
-    daniel_lynch.passbolt.update_user:
+      daniel_lynch.passbolt.update_user:
         passbolt_uri: "{{ passbolt_uri }}"
         gpgkey: "{{ gpgkey }}"
         passphrase: "{{ passphrase }}"
@@ -44,7 +44,7 @@ Ansible Collection to allow Passbolt managment from Ansible.
 - hosts: localhost
   tasks:
     - name: Delete User
-    daniel_lynch.passbolt.delete_user:
+      daniel_lynch.passbolt.delete_user:
         passbolt_uri: "{{ passbolt_uri }}"
         gpgkey: "{{ gpgkey }}"
         passphrase: "{{ passphrase }}"
@@ -57,7 +57,7 @@ Ansible Collection to allow Passbolt managment from Ansible.
 - hosts: localhost
   tasks:
     - name: Create Group
-    daniel_lynch.passbolt.create_group:
+      daniel_lynch.passbolt.create_group:
         passbolt_uri: "{{ passbolt_uri }}"
         gpgkey: "{{ gpgkey }}"
         passphrase: "{{ passphrase }}"
@@ -74,7 +74,7 @@ Ansible Collection to allow Passbolt managment from Ansible.
 - hosts: localhost
   tasks:
     - name: Update Group
-    daniel_lynch.passbolt.update_group:
+      daniel_lynch.passbolt.update_group:
         passbolt_uri: "{{ passbolt_uri }}"
         gpgkey: "{{ gpgkey }}"
         passphrase: "{{ passphrase }}"
@@ -91,7 +91,7 @@ Ansible Collection to allow Passbolt managment from Ansible.
 - hosts: localhost
   tasks:
     - name: Delete Group
-    daniel_lynch.passbolt.delete_group:
+      daniel_lynch.passbolt.delete_group:
         passbolt_uri: "{{ passbolt_uri }}"
         gpgkey: "{{ gpgkey }}"
         passphrase: "{{ passphrase }}"
@@ -104,7 +104,7 @@ Ansible Collection to allow Passbolt managment from Ansible.
 - hosts: localhost
   tasks:
     - name: Create Password
-    daniel_lynch.passbolt.create_password:
+      daniel_lynch.passbolt.create_password:
         passbolt_uri: "{{ passbolt_uri }}"
         gpgkey: "{{ gpgkey }}"
         passphrase: "{{ passphrase }}"
@@ -121,7 +121,7 @@ Ansible Collection to allow Passbolt managment from Ansible.
 - hosts: localhost
   tasks:
     - name: Update Password
-    daniel_lynch.passbolt.update_password:
+      daniel_lynch.passbolt.update_password:
         passbolt_uri: "{{ passbolt_uri }}"
         gpgkey: "{{ gpgkey }}"
         passphrase: "{{ passphrase }}"
@@ -140,7 +140,7 @@ Ansible Collection to allow Passbolt managment from Ansible.
 - hosts: localhost
   tasks:
     - name: Share Password
-    daniel_lynch.passbolt.share_password:
+      daniel_lynch.passbolt.share_password:
         passbolt_uri: "{{ passbolt_uri }}"
         gpgkey: "{{ gpgkey }}"
         passphrase: "{{ passphrase }}"
@@ -159,7 +159,7 @@ Ansible Collection to allow Passbolt managment from Ansible.
 - hosts: localhost
   tasks:
     - name: Delete Password
-    daniel_lynch.passbolt.delete_password:
+      daniel_lynch.passbolt.delete_password:
         passbolt_uri: "{{ passbolt_uri }}"
         gpgkey: "{{ gpgkey }}"
         passphrase: "{{ passphrase }}"
