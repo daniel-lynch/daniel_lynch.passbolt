@@ -1,0 +1,2 @@
+---
+  - debug: msg="{{ lookup('daniel_lynch.passbolt.get_password', 'Testing') }}"

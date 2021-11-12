@@ -1,10 +1,32 @@
 # Readme
 Ansible Collection to allow Passbolt managment from Ansible.
 
+## Requirements
+Python3 https://www.python.org/downloads/
+
+GnuPG https://gnupg.org/download/index.html
+
+Passbolt python module `pip install passbolt`
+
+
+
 ## Install:
 `ansible-galaxy collection install daniel_lynch.passbolt`
 
 ## Examples
+
+### Get Password. [Docs](docs/build/html/lookup/get_password.html)
+```yaml
+---
+- hosts: localhost
+  vars:
+    passbolt_uri: https://passbolt.djlynch.us
+    gpgkey: "{{ lookup('file', 'key.asc') }}"
+    passphrase: Password
+  tasks:
+    - debug:
+        msg: "{{ lookup('daniel_lynch.passbolt.get_password', 'Testing', gpgkey=gpgkey, passphrase=passphrase, passbolt_uri=passbolt_uri) }}"
+```
 
 ### Create User. [Docs](docs/build/html/modules/create_user.html)
 ```yaml
@@ -166,3 +188,6 @@ Ansible Collection to allow Passbolt managment from Ansible.
         name: "Testing"
         username: "Test"
 ```
+
+## Considerations
+Use ansible-vault to encrypt passphrase and GPG key https://docs.ansible.com/ansible/2.8/user_guide/playbooks_vault.html#single-encrypted-variable
