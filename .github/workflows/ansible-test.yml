@@ -144,7 +144,7 @@ jobs:
           - 3.7
           - 3.8
           - 3.9
-          - 3.10
+          - "3.10"
         exclude:
           # Because ansible-test doesn't support python3.9 for Ansible 2.9
           - ansible: stable-2.9
@@ -194,10 +194,9 @@ jobs:
           USER1: ${{ secrets.USER }}
           USER2: ${{ secrets.USER2 }}
         run: |
-          echo "---" > ./ansible_collections/${{env.NAMESPACE}}/${{env.COLLECTION_NAME}}/tests/integration/integration_config.yml
-          echo "admin: $ADMIN" >> ./ansible_collections/${{env.NAMESPACE}}/${{env.COLLECTION_NAME}}/tests/integration/integration_config.yml
+          echo "admin: $ADMIN" > ./ansible_collections/${{env.NAMESPACE}}/${{env.COLLECTION_NAME}}/tests/integration/integration_config.yml
           echo "admin2: $ADMIN2" >> ./ansible_collections/${{env.NAMESPACE}}/${{env.COLLECTION_NAME}}/tests/integration/integration_config.yml
-          echo -e "gpgkey: |\n  $GPGKEY\n" >> ./ansible_collections/${{env.NAMESPACE}}/${{env.COLLECTION_NAME}}/tests/integration/integration_config.yml
+          echo -e "gpgkey: |\n$GPGKEY\n" >> ./ansible_collections/${{env.NAMESPACE}}/${{env.COLLECTION_NAME}}/tests/integration/integration_config.yml
           echo "passbolt_uri: $PASSBOLT_URI" >> ./ansible_collections/${{env.NAMESPACE}}/${{env.COLLECTION_NAME}}/tests/integration/integration_config.yml
           echo "passphrase: $PASSPHRASE" >> ./ansible_collections/${{env.NAMESPACE}}/${{env.COLLECTION_NAME}}/tests/integration/integration_config.yml
           echo "user: $USER1" >> ./ansible_collections/${{env.NAMESPACE}}/${{env.COLLECTION_NAME}}/tests/integration/integration_config.yml
