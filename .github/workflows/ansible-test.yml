@@ -144,7 +144,7 @@ jobs:
           - 3.7
           - 3.8
           - 3.9
-          - "3.10"
+          - 3.10
         exclude:
           # Because ansible-test doesn't support python3.9 for Ansible 2.9
           - ansible: stable-2.9
@@ -186,9 +186,15 @@ jobs:
       # This seems to be the only way to get Secrets to ansible-test
       - name: Create integration_config.yml and pipe in webhook secret
         env:
-          WEBHOOK: ${{ secrets.WEBHOOK }}
+          ADMIN: ${{ secrets.ADMIN }}
+          ADMIN2: ${{ secrets.ADMIN2 }}
+          GPGKEY: ${{ secrets.GPGKEY }}
+          PASSBOLT_URI: ${{ secrets.PASSBOLT_URI }}
+          PASSPHRASE: ${{ secrets.PASSPHRASE }}
+          USER1: ${{ secrets.USER }}
+          USER2: ${{ secrets.USER2 }}
         run: |
-          echo "webhook: $WEBHOOK" > ./ansible_collections/${{env.NAMESPACE}}/${{env.COLLECTION_NAME}}/tests/integration/integration_config.yml
+          echo -e "admin: $ADMIN\nadmin2: $ADMIN2\ngpgkey: $GPGKEY\npassbolt_uri: $PASSBOLT_URI\npassphrase: $PASSPHRASE\nuser: $USER1\nuser2: $USER2" > ./ansible_collections/${{env.NAMESPACE}}/${{env.COLLECTION_NAME}}/tests/integration/integration_config.yml
 
       # Run the integration tests
       - name: Run integration test
