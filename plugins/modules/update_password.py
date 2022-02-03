@@ -125,7 +125,7 @@ def main():
     gpgkey = module.params['gpgkey']
     passphrase = module.params['passphrase']
     name = module.params['name']
-    password = module.params['name']
+    password = module.params['password']
     username = module.params['username']
     newname = module.params['newname']
     newusername = module.params['newusername']
