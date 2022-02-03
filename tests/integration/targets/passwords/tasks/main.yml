@@ -30,13 +30,13 @@
     passbolt_uri: "{{ passbolt_uri }}"
     gpgkey: "{{ gpgkey }}"
     passphrase: "{{ passphrase }}"
-    name: "Testing"
+    name: "Testing2"
     users:
       - "{{ admin2 }}"
     groups:
       - Users
     permission: Read
-    username: "Test"
+    username: "Test2"
   delegate_to: localhost
 
 - name: Delete Password
@@ -44,6 +44,6 @@
     passbolt_uri: "{{ passbolt_uri }}"
     gpgkey: "{{ gpgkey }}"
     passphrase: "{{ passphrase }}"
-    name: "Testing"
-    username: "Test"
+    name: "Testing2"
+    username: "Test2"
   delegate_to: localhost
