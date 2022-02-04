@@ -1,8 +1,9 @@
+[![CI](https://github.com/daniel-lynch/daniel_lynch.passbolt/actions/workflows/ansible-test.yml/badge.svg?branch=main)](https://github.com/daniel-lynch/daniel_lynch.passbolt/actions/workflows/ansible-test.yml)
 # Readme
 Ansible Collection to allow Passbolt managment from Ansible.
 
 ## Requirements
-Python3 https://www.python.org/downloads/
+Python3.6+ https://www.python.org/downloads/
 
 GnuPG https://gnupg.org/download/index.html
 
