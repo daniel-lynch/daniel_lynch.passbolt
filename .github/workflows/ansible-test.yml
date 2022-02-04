@@ -131,6 +131,7 @@ jobs:
     runs-on: ubuntu-latest
     name: I (Ⓐ${{ matrix.ansible }}+py${{ matrix.python }})
     strategy:
+      max-parallel: 1
       fail-fast: false
       matrix:
         ansible:
