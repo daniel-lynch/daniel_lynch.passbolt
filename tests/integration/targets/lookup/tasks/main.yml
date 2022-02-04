@@ -1,2 +1,2 @@
 ---
-  - debug: msg="{{ lookup('daniel_lynch.passbolt.get_password', 'Testing') }}"
+- debug: msg="{{ lookup('daniel_lynch.passbolt.get_password', 'Testing', gpgkey=gpgkey, passphrase=passphrase, passbolt_uri=passbolt_uri) }}"

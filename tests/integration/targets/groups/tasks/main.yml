@@ -4,7 +4,7 @@
     passbolt_uri: "{{ passbolt_uri }}"
     gpgkey: "{{ gpgkey }}"
     passphrase: "{{ passphrase }}"
-    name: "Test"
+    name: "{{ ansible_facts.hostname }}"
     admins:
       - "{{ admin }}"
     users:
@@ -16,7 +16,7 @@
     passbolt_uri: "{{ passbolt_uri }}"
     gpgkey: "{{ gpgkey }}"
     passphrase: "{{ passphrase }}"
-    name: "Test"
+    name: "{{ ansible_facts.hostname }}"
     admins:
       - "{{ admin2 }}"
     users:
@@ -28,5 +28,5 @@
     passbolt_uri: "{{ passbolt_uri }}"
     gpgkey: "{{ gpgkey }}"
     passphrase: "{{ passphrase }}"
-    name: "Test"
+    name: "{{ ansible_facts.hostname }}"
   delegate_to: localhost
