@@ -68,8 +68,8 @@ try:
 except ImportError:
     HAS_MODULE = False
 
-class LookupModule(LookupBase):
 
+class LookupModule(LookupBase):
 
     def run(self, terms, variables=None, **kwargs):
 
