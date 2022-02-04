@@ -93,11 +93,11 @@ class LookupModule(LookupBase):
                 if value == "dict":
                     return_format = "dict"
             if key == "gpgkey":
-            gpgkey = value
+                gpgkey = value
             if key == "passphrase":
-            passphrase = value
+                passphrase = value
             if key == "passbolt_uri":
-            passbolt_uri = value
+                passbolt_uri = value
 
         Passbolt = passbolt(gpgkey, passphrase, passbolt_uri)
         display.vvvv("Logged into Passbolt")
@@ -107,10 +107,10 @@ class LookupModule(LookupBase):
             display.vvvv("Got password(s)")
             if passwords:
                 for password in passwords:
-                if return_format == "dict":
-                    ret.append(password.__dict__)
-                if return_format == "password":
-                    ret.append(password.password)
+                    if return_format == "dict":
+                        ret.append(password.__dict__)
+                    if return_format == "password":
+                        ret.append(password.password)
             else:
                 raise AnsibleError("Could not locate password for: %s" % term)
 
