@@ -70,44 +70,45 @@ except ImportError:
 
 class LookupModule(LookupBase):
 
+
     def run(self, terms, variables=None, **kwargs):
 
-      if not HAS_MODULE:
-          raise AnsibleError("Please pip install passbolt to use the passbolt get_password lookup module.")
+        if not HAS_MODULE:
+            raise AnsibleError("Please pip install passbolt to use the passbolt get_password lookup module.")
 
-      display.vvvv("Init")
-      gpgkey = None
-      passphrase = None
-      passbolt_uri = None
-      username = None
-      return_format = "password"
+        display.vvvv("Init")
+        gpgkey = None
+        passphrase = None
+        passbolt_uri = None
+        username = None
+        return_format = "password"
 
-      for key, value in kwargs.items():
-        if key == "username":
-          username = value
-        if key == "return_format":
-          if value == "dict":
-            return_format = "dict"
-        if key == "gpgkey":
-          gpgkey = value
-        if key == "passphrase":
-          passphrase = value
-        if key == "passbolt_uri":
-          passbolt_uri = value
+        for key, value in kwargs.items():
+            if key == "username":
+            username = value
+            if key == "return_format":
+            if value == "dict":
+                return_format = "dict"
+            if key == "gpgkey":
+            gpgkey = value
+            if key == "passphrase":
+            passphrase = value
+            if key == "passbolt_uri":
+            passbolt_uri = value
 
-      Passbolt = passbolt(gpgkey, passphrase, passbolt_uri)
-      display.vvvv("Logged into Passbolt")
-      ret = []
-      for term in terms:
-          passwords = Passbolt.getpassword(term, username)
-          display.vvvv("Got password(s)")
-          if passwords:
-            for password in passwords:
-              if return_format == "dict":
-                ret.append(password.__dict__)
-              if return_format == "password":
-                ret.append(password.password)
-          else:
-            raise AnsibleError("Could not locate password for: %s" % term)
+        Passbolt = passbolt(gpgkey, passphrase, passbolt_uri)
+        display.vvvv("Logged into Passbolt")
+        ret = []
+        for term in terms:
+            passwords = Passbolt.getpassword(term, username)
+            display.vvvv("Got password(s)")
+            if passwords:
+                for password in passwords:
+                if return_format == "dict":
+                    ret.append(password.__dict__)
+                if return_format == "password":
+                    ret.append(password.password)
+            else:
+                raise AnsibleError("Could not locate password for: %s" % term)
 
-      return ret
+        return ret
