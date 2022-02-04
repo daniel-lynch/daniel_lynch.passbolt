@@ -112,6 +112,6 @@ class LookupModule(LookupBase):
                     if return_format == "password":
                         ret.append(password.password)
             else:
-                raise AnsibleError(f"Could not locate password for: {term}")
+                raise AnsibleError("Could not locate password for: %s" % term)
 
         return ret
