@@ -4,7 +4,7 @@
     passbolt_uri: "{{ passbolt_uri }}"
     gpgkey: "{{ gpgkey }}"
     passphrase: "{{ passphrase }}"
-    name: "Testing"
+    name: "{{ ansible_facts.hostname }}"
     password: "password"
     username: "Test"
     uri: "test.com"
@@ -16,10 +16,10 @@
     passbolt_uri: "{{ passbolt_uri }}"
     gpgkey: "{{ gpgkey }}"
     passphrase: "{{ passphrase }}"
-    name: "Testing"
+    name: "{{ ansible_facts.hostname }}"
     password: "password"
     username: "Test"
-    newname: "Testing2"
+    newname: "{{ ansible_facts.hostname }}2"
     newusername: "Test2"
     uri: "test2.com"
     description: "This is a description2"
@@ -30,7 +30,7 @@
     passbolt_uri: "{{ passbolt_uri }}"
     gpgkey: "{{ gpgkey }}"
     passphrase: "{{ passphrase }}"
-    name: "Testing2"
+    name: "{{ ansible_facts.hostname }}2"
     users:
       - "{{ admin2 }}"
     groups:
@@ -44,6 +44,6 @@
     passbolt_uri: "{{ passbolt_uri }}"
     gpgkey: "{{ gpgkey }}"
     passphrase: "{{ passphrase }}"
-    name: "Testing2"
+    name: "{{ ansible_facts.hostname }}2"
     username: "Test2"
   delegate_to: localhost
