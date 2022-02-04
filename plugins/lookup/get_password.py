@@ -76,6 +76,9 @@ class LookupModule(LookupBase):
         if not HAS_MODULE:
             raise AnsibleError("Please pip install passbolt to use the passbolt get_password lookup module.")
 
+        if not kwargs.items():
+            raise AnsibleError("Missing parameters")
+
         display.vvvv("Init")
         gpgkey = None
         passphrase = None
@@ -85,10 +88,10 @@ class LookupModule(LookupBase):
 
         for key, value in kwargs.items():
             if key == "username":
-            username = value
+                username = value
             if key == "return_format":
-            if value == "dict":
-                return_format = "dict"
+                if value == "dict":
+                    return_format = "dict"
             if key == "gpgkey":
             gpgkey = value
             if key == "passphrase":
