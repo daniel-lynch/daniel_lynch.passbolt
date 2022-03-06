@@ -4,7 +4,6 @@ __metaclass__ = type
 
 DOCUMENTATION = """
 name: get_password
-lookup: password
 author: Daniel Lynch (@daniel-lynch)
 version_added: "0.1.1"
 short_description: Get password from Passbolt
