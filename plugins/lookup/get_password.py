@@ -1,11 +1,11 @@
-# python 3 headers, required if submitting to Ansible
+# GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
 from __future__ import (absolute_import, division, print_function)
 __metaclass__ = type
 
 DOCUMENTATION = """
 name: get_password
-lookup: get_password
-author: Daniel Lynch <daniel.lynch2016@gmail.com>
+lookup: password
+author: Daniel Lynch (@daniel-lynch)
 version_added: "0.1.1"
 short_description: Get password from Passbolt
 description:
