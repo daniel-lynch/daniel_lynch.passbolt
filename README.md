@@ -16,7 +16,7 @@ Passbolt python module `pip install passbolt`
 
 ## Examples
 
-### Get Password. [Docs](docs/build/html/lookup/get_password.html)
+### Get Password. [Docs](docs/source/lookup/get_password.rst)
 ```yaml
 ---
 - hosts: localhost
@@ -29,7 +29,7 @@ Passbolt python module `pip install passbolt`
         msg: "{{ lookup('daniel_lynch.passbolt.get_password', 'Testing', gpgkey=gpgkey, passphrase=passphrase, passbolt_uri=passbolt_uri) }}"
 ```
 
-### Create User. [Docs](docs/build/html/modules/create_user.html)
+### Create User. [Docs](docs/source/modules/create_user.rst)
 ```yaml
 ---
 - hosts: localhost
@@ -45,7 +45,7 @@ Passbolt python module `pip install passbolt`
         admin: True
 ```
 
-### Update User. [Docs](docs/build/html/modules/update_user.html)
+### Update User. [Docs](docs/source/modules/update_user.rst)
 ```yaml
 ---
 - hosts: localhost
@@ -61,7 +61,7 @@ Passbolt python module `pip install passbolt`
         admin: True
 ```
 
-### Delete User. [Docs](docs/build/html/modules/delete_user.html)
+### Delete User. [Docs](docs/source/modules/delete_user.rst)
 ```yaml
 ---
 - hosts: localhost
@@ -74,7 +74,7 @@ Passbolt python module `pip install passbolt`
         username: "testing@example.com"
 ```
 
-### Create Group. [Docs](docs/build/html/modules/create_group.html)
+### Create Group. [Docs](docs/source/modules/create_group.rst)
 ```yaml
 ---
 - hosts: localhost
@@ -91,7 +91,7 @@ Passbolt python module `pip install passbolt`
         - "{{ user }}"
 ```
 
-### Update Group. [Docs](docs/build/html/modules/update_group.html)
+### Update Group. [Docs](docs/source/modules/update_group.rst)
 ```yaml
 ---
 - hosts: localhost
@@ -108,7 +108,7 @@ Passbolt python module `pip install passbolt`
         - "{{ user2 }}"
 ```
 
-### Delete Group. [Docs](docs/build/html/modules/delete_group.html)
+### Delete Group. [Docs](docs/source/modules/delete_group.rst)
 ```yaml
 ---
 - hosts: localhost
@@ -121,7 +121,7 @@ Passbolt python module `pip install passbolt`
         name: "Test"
 ```
 
-### Create Password. [Docs](docs/build/html/modules/create_password.html)
+### Create Password. [Docs](docs/source/modules/create_password.rst)
 ```yaml
 ---
 - hosts: localhost
@@ -138,7 +138,7 @@ Passbolt python module `pip install passbolt`
         description: "This is a description"
 ```
 
-### Update Password. [Docs](docs/build/html/modules/update_password.html)
+### Update Password. [Docs](docs/source/modules/update_password.rst)
 ```yaml
 ---
 - hosts: localhost
@@ -157,7 +157,7 @@ Passbolt python module `pip install passbolt`
         description: "This is a description2"
 ```
 
-### Share Password. [Docs](docs/build/html/modules/share_password.html)
+### Share Password. [Docs](docs/source/modules/share_password.rst)
 ```yaml
 ---
 - hosts: localhost
@@ -176,7 +176,7 @@ Passbolt python module `pip install passbolt`
         username: "Test"
 ```
 
-### Delete Password. [Docs](docs/build/html/modules/delete_password.html)
+### Delete Password. [Docs](docs/source/modules/delete_password.rst)
 ```yaml
 ---
 - hosts: localhost
