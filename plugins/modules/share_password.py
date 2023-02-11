@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-# (c) 2021, Daniel Lynch <daniel.lynch2016@gmail.com>
+# (c) 2023, Daniel Lynch <daniel.lynch2016@gmail.com>
 #
 # GNU General Public License v3.0+ (see COPYING or https://www.gnu.org/licenses/gpl-3.0.txt)
 
@@ -85,6 +85,7 @@ except ImportError:
     ANOTHER_LIBRARY_IMPORT_ERROR = traceback.format_exc()
 else:
     HAS_ANOTHER_LIBRARY = True
+    ANOTHER_LIBRARY_IMPORT_ERROR = False
 
 
 def main():
