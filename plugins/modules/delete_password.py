@@ -13,6 +13,7 @@ module: delete_password
 short_description: Delete password in Passbolt.
 description:
     - The Passbolt delete password module deletes a password in Passbolt via the API.
+    - You either need the gpgkey and the passphrase or the fingerprint of the secret key stored in the gpg-agent.
 author: "Daniel Lynch (@daniel-lynch)"
 options:
   passbolt_uri:
@@ -73,6 +74,8 @@ def main():
             passphrase=dict(type='str', required=True, no_log=True),
             name=dict(type='str', required=True),
             username=dict(type='str', required=False),
+            fingerprint=dict(type='str', required=False, default=None),
+            verify=dict(type='str', required=False, default=True),
         ),
         supports_check_mode=True,
     )
@@ -85,8 +88,11 @@ def main():
     passphrase = module.params['passphrase']
     name = module.params['name']
     username = module.params['username']
+    verify = module.params['verify']
+    fingerprint = module.params['fingerprint']
 
-    Passbolt = passbolt(gpgkey, passphrase, passbolt_uri)
+    Passbolt = passbolt(apiurl=passbolt_uri, privatekey=gpgkey, passphrase=passphrase, keyfingerprint=fingerprint,
+                        verify=verify)
 
     response = Passbolt.deletepassword(name, username)
     if response == "The resource has been deleted successfully.":

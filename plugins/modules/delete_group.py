@@ -13,6 +13,7 @@ module: delete_group
 short_description: Delete group in Passbolt
 description:
     - The Passbolt delete group module deletes a group in Passbolt via the API.
+    - You either need the gpgkey and the passphrase or the fingerprint of the secret key stored in the gpg-agent.
 author: "Daniel Lynch (@daniel-lynch)"
 options:
   passbolt_uri:
@@ -65,7 +66,9 @@ def main():
             passbolt_uri=dict(type='str', required=True, no_log=True),
             gpgkey=dict(type='str', required=True, no_log=True),
             passphrase=dict(type='str', required=True, no_log=True),
-            name=dict(type='str', required=True)
+            name=dict(type='str', required=True),
+            fingerprint = dict(type='str', required=False, default=None),
+            verify = dict(type='str', required=False, default=True),
         ),
         supports_check_mode=True,
     )
@@ -77,8 +80,11 @@ def main():
     gpgkey = module.params['gpgkey']
     passphrase = module.params['passphrase']
     name = module.params['name']
+    verify = module.params['verify']
+    fingerprint = module.params['fingerprint']
 
-    Passbolt = passbolt(gpgkey, passphrase, passbolt_uri)
+    Passbolt = passbolt(apiurl=passbolt_uri, privatekey=gpgkey, passphrase=passphrase, keyfingerprint=fingerprint,
+                        verify=verify)
 
     response = Passbolt.deletegroup(name)
     if response == "The group was deleted successfully.":

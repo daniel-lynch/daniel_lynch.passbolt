@@ -13,6 +13,7 @@ module: delete_user
 short_description: delete user in Passbolt
 description:
     - The Passbolt delete user module deletes a user in Passbolt via the API.
+    - You either need the gpgkey and the passphrase or the fingerprint of the secret key stored in the gpg-agent.
 author: "Daniel Lynch (@daniel-lynch)"
 options:
   passbolt_uri:
@@ -65,7 +66,9 @@ def main():
             passbolt_uri=dict(type='str', required=True, no_log=True),
             gpgkey=dict(type='str', required=True, no_log=True),
             passphrase=dict(type='str', required=True, no_log=True),
-            username=dict(type='str', required=True)
+            username=dict(type='str', required=True),
+            fingerprint=dict(type='str', required=False, default=None),
+            verify=dict(type='str', required=False, default=True),
         ),
         supports_check_mode=True,
     )
@@ -77,8 +80,11 @@ def main():
     gpgkey = module.params['gpgkey']
     passphrase = module.params['passphrase']
     username = module.params['username']
+    verify = module.params['verify']
+    fingerprint = module.params['fingerprint']
 
-    Passbolt = passbolt(gpgkey, passphrase, passbolt_uri)
+    Passbolt = passbolt(apiurl=passbolt_uri, privatekey=gpgkey, passphrase=passphrase, keyfingerprint=fingerprint,
+                        verify=verify)
 
     response = Passbolt.deleteuser(username)
     if response == "The user has been deleted successfully.":

@@ -97,8 +97,12 @@ class LookupModule(LookupBase):
                 passphrase = value
             if key == "passbolt_uri":
                 passbolt_uri = value
-
-        Passbolt = passbolt(gpgkey, passphrase, passbolt_uri)
+            if key == "fingerprint":
+                fingerprint = value
+            if key == "verify":
+                verify = value
+        Passbolt = passbolt(apiurl=passbolt_uri, privatekey=gpgkey, passphrase=passphrase, fingerprint=fingerprint,
+                 verify=verify)
         display.vvvv("Logged into Passbolt")
         ret = []
         for term in terms:

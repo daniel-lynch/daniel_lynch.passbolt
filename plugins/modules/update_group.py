@@ -13,6 +13,7 @@ module: update_group
 short_description: Update group in Passbolt
 description:
     - The Passbolt update group module updates a group in Passbolt via the API. Currently only supports adding Users and Admins due to API limitations.
+    - You either need the gpgkey and the passphrase or the fingerprint of the secret key stored in the gpg-agent.
 author: "Daniel Lynch (@daniel-lynch)"
 options:
   passbolt_uri:
@@ -83,7 +84,9 @@ def main():
             passphrase=dict(type='str', required=True, no_log=True),
             name=dict(type='str', required=True),
             admins=dict(type='list', elements='str', required=False),
-            users=dict(type='list', elements='str', required=False)
+            users=dict(type='list', elements='str', required=False),
+            fingerprint = dict(type='str', required=False, default=None),
+            verify = dict(type='str', required=False, default=True),
         ),
         supports_check_mode=True,
     )
@@ -97,6 +100,8 @@ def main():
     name = module.params['name']
     admins = module.params['admins']
     users = module.params['users']
+    verify = module.params['verify']
+    fingerprint = module.params['fingerprint']
 
     Passbolt = passbolt(gpgkey, passphrase, passbolt_uri)
 

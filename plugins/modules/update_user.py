@@ -13,6 +13,7 @@ module: update_user
 short_description: Update user in Passbolt
 description:
     - The Passbolt update user module updates a user in Passbolt via the API.
+    - You either need the gpgkey and the passphrase or the fingerprint of the secret key stored in the gpg-agent.
 author: "Daniel Lynch (@daniel-lynch)"
 options:
   passbolt_uri:
@@ -87,7 +88,9 @@ def main():
             username=dict(type='str', required=True),
             firstname=dict(type='str', required=True),
             lastname=dict(type='str', required=True),
-            admin=dict(type='bool', required=False, default=False)
+            admin=dict(type='bool', required=False, default=False),
+            fingerprint=dict(type='str', required=False, default=None),
+            verify=dict(type='str', required=False, default=True),
         ),
         supports_check_mode=True,
     )
@@ -102,8 +105,11 @@ def main():
     firstname = module.params['firstname']
     lastname = module.params['lastname']
     admin = module.params['admin']
+    verify = module.params['verify']
+    fingerprint = module.params['fingerprint']
 
-    Passbolt = passbolt(gpgkey, passphrase, passbolt_uri)
+    Passbolt = passbolt(apiurl=passbolt_uri, privatekey=gpgkey, passphrase=passphrase, keyfingerprint=fingerprint,
+                        verify=verify)
 
     response = Passbolt.updateuser(username, firstname, lastname, admin)
     if response == "The user has been updated successfully.":
