@@ -23,14 +23,22 @@ options:
       - The Passbolt instance Fully Qualified Domain Name(FQDN)
   gpgkey:
     type: str
-    required: true
+    required: false
     description:
       - The GPG Private key used to access Passbolt.
   passphrase:
     type: str
-    required: true
+    required: false
     description:
       - The Passphrase used with the GPG Private key used to access Passbolt.
+  fingerprint:
+    description:
+      - The fingerprint of the imported Private key used to access Passbolt.
+    required: false
+  verify:
+    description:
+      - Whether to verify SSL or not. (Defaults to verify)
+    required: false
   username:
     type: str
     required: true
@@ -60,6 +68,16 @@ EXAMPLES = """
     passbolt_uri: "https://passbolt.example.com"
     gpgkey: "{{ gpgkey }}"
     passphrase: "password"
+    username: "testing@example.com"
+    firstname: "Test"
+    lastname: "Ing"
+    admin: True
+  delegate_to: localhost
+
+- name: Create User Using Fingerprint
+  daniel_lynch.passbolt.create_user:
+    passbolt_uri: "https://passbolt.example.com"
+    fingerprint="{{ fingerprint }}"
     username: "testing@example.com"
     firstname: "Test"
     lastname: "Ing"

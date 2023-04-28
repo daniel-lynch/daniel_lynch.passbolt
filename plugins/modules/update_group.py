@@ -23,14 +23,22 @@ options:
       - The Passbolt instance Fully Qualified Domain Name(FQDN)
   gpgkey:
     type: str
-    required: true
+    required: false
     description:
       - The GPG Private key used to access Passbolt.
   passphrase:
     type: str
-    required: true
+    required: false
     description:
       - The Passphrase used with the GPG Private key used to access Passbolt.
+  fingerprint:
+    description:
+      - The fingerprint of the imported Private key used to access Passbolt.
+    required: false
+  verify:
+    description:
+      - Whether to verify SSL or not. (Defaults to verify)
+    required: false
   name:
     type: str
     required: true
@@ -62,6 +70,17 @@ EXAMPLES = """
     users:
       - testing2@example.com
   delegate_to: localhost
+
+- name: Update Group Using Fingerprint
+  daniel_lynch.passbolt.update_group:
+    passbolt_uri: "https://passbolt.example.com"
+    fingerprint="{{ fingerprint }}"
+    name: "Users"
+    admins:
+      - testing@example.com
+    users:
+      - testing2@example.com
+  delegate_to: localhost
 """
 import traceback
 
@@ -80,13 +99,13 @@ def main():
     module = AnsibleModule(
         argument_spec=dict(
             passbolt_uri=dict(type='str', required=True, no_log=True),
-            gpgkey=dict(type='str', required=True, no_log=True),
-            passphrase=dict(type='str', required=True, no_log=True),
+            gpgkey=dict(type='str', required=False, no_log=True),
+            passphrase=dict(type='str', required=False, no_log=True),
             name=dict(type='str', required=True),
             admins=dict(type='list', elements='str', required=False),
             users=dict(type='list', elements='str', required=False),
-            fingerprint = dict(type='str', required=False, default=None),
-            verify = dict(type='str', required=False, default=True),
+            fingerprint=dict(type='str', required=False, default=None),
+            verify=dict(type='str', required=False, default=True),
         ),
         supports_check_mode=True,
     )
