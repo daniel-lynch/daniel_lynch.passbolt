@@ -31,6 +31,14 @@ options:
     required: false
     description:
       - The Passphrase used with the GPG Private key used to access Passbolt.
+  fingerprint:
+    description:
+      - The fingerprint of the imported Private key used to access Passbolt.
+    required: false
+  verify:
+    description:
+      - Whether to verify SSL or not. (Defaults to verify)
+    required: false
   name:
     type: str
     required: true
@@ -67,6 +75,19 @@ EXAMPLES = """
     passbolt_uri: "https://passbolt.example.com"
     gpgkey: "{{ gpgkey }}"
     passphrase: "password"
+    name: "Testing"
+    users:
+      - daniel.lynch2016@gmail.com
+    groups:
+      - Users
+    permission: Read
+    username: "Test"
+  delegate_to: localhost
+
+- name: Share Password Using Fingerprint
+  daniel_lynch.passbolt.share_password:
+    passbolt_uri: "https://passbolt.example.com"
+    fingerprint="{{ fingerprint }}"
     name: "Testing"
     users:
       - daniel.lynch2016@gmail.com

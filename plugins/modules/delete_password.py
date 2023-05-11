@@ -23,14 +23,22 @@ options:
       - The Passbolt instance Fully Qualified Domain Name(FQDN).
   gpgkey:
     type: str
-    required: true
+    required: false
     description:
       - The GPG Private key used to access Passbolt.
   passphrase:
     type: str
-    required: true
+    required: false
     description:
       - The Passphrase used with the GPG Private key used to access Passbolt.
+  fingerprint:
+    description:
+      - The fingerprint of the imported Private key used to access Passbolt.
+    required: false
+  verify:
+    description:
+      - Whether to verify SSL or not. (Defaults to verify)
+    required: false
   name:
     type: str
     required: true
@@ -52,6 +60,14 @@ EXAMPLES = """
     name: "Testing"
     username: "Test"
   delegate_to: localhost
+
+- name: Delete Password Using Fingerprint
+  daniel_lynch.passbolt.delete_password:
+    passbolt_uri: "https://passbolt.example.com"
+    fingerprint="{{ fingerprint }}"
+    name: "Testing"
+    username: "Test"
+  delegate_to: localhost  
 """
 import traceback
 
@@ -70,8 +86,8 @@ def main():
     module = AnsibleModule(
         argument_spec=dict(
             passbolt_uri=dict(type='str', required=True, no_log=True),
-            gpgkey=dict(type='str', required=True, no_log=True),
-            passphrase=dict(type='str', required=True, no_log=True),
+            gpgkey=dict(type='str', required=False, no_log=True),
+            passphrase=dict(type='str', required=False, no_log=True),
             name=dict(type='str', required=True),
             username=dict(type='str', required=False),
             fingerprint=dict(type='str', required=False, default=None),
