@@ -25,11 +25,19 @@ options:
   passphrase:
     description:
       - The Passphrase used with the GPG Private key used to access Passbolt.
-    required: true
+    required: false
   gpgkey:
     description:
       - The GPG Private key used to access Passbolt.
-    required: true
+    required: false
+  fingerprint:
+    description:
+      - The fingerprint of the imported Private key used to access Passbolt.
+    required: false
+  verify:
+    description:
+      - Whether to verify SSL or not. (Defaults to verify)
+    required: false
   return_format:
     description:
       - Controls how passwords are returned.
@@ -50,6 +58,9 @@ EXAMPLES = """
 - name: Get list of password dictionaries with the name Testing
   ansible.builtin.debug:
     msg: "{{ lookup('daniel_lynch.passbolt.get_password', 'Testing', return_format='dict', gpgkey=gpgkey, passphrase=passphrase, passbolt_uri=passbolt_uri) }}"
+- name: Get list of passwords with the name Testing Using Fingerprint
+  ansible.builtin.debug:
+    msg: "{{ lookup('daniel_lynch.passbolt.get_password', 'Testing', fingerprint=fingerprint, passbolt_uri=passbolt_uri) }}"
 """
 
 from ansible.errors import AnsibleError
@@ -97,8 +108,12 @@ class LookupModule(LookupBase):
                 passphrase = value
             if key == "passbolt_uri":
                 passbolt_uri = value
-
-        Passbolt = passbolt(gpgkey, passphrase, passbolt_uri)
+            if key == "fingerprint":
+                fingerprint = value
+            if key == "verify":
+                verify = value
+        Passbolt = passbolt(apiurl=passbolt_uri, privatekey=gpgkey, passphrase=passphrase, fingerprint=fingerprint,
+                 verify=verify)
         display.vvvv("Logged into Passbolt")
         ret = []
         for term in terms:

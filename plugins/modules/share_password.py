@@ -13,6 +13,7 @@ module: share_password
 short_description: Share password in Passbolt.
 description:
     - The Passbolt Share password module shares a password with Users and/or Groups in Passbolt via the API.
+    - You either need the gpgkey and the passphrase or the fingerprint of the secret key stored in the gpg-agent.
 author: "Daniel Lynch (@daniel-lynch)"
 options:
   passbolt_uri:
@@ -22,14 +23,22 @@ options:
       - The Passbolt instance Fully Qualified Domain Name(FQDN).
   gpgkey:
     type: str
-    required: true
+    required: false
     description:
       - The GPG Private key used to access Passbolt.
   passphrase:
     type: str
-    required: true
+    required: false
     description:
       - The Passphrase used with the GPG Private key used to access Passbolt.
+  fingerprint:
+    description:
+      - The fingerprint of the imported Private key used to access Passbolt.
+    required: false
+  verify:
+    description:
+      - Whether to verify SSL or not. (Defaults to verify)
+    required: false
   name:
     type: str
     required: true
@@ -74,6 +83,19 @@ EXAMPLES = """
     permission: Read
     username: "Test"
   delegate_to: localhost
+
+- name: Share Password Using Fingerprint
+  daniel_lynch.passbolt.share_password:
+    passbolt_uri: "https://passbolt.example.com"
+    fingerprint="{{ fingerprint }}"
+    name: "Testing"
+    users:
+      - daniel.lynch2016@gmail.com
+    groups:
+      - Users
+    permission: Read
+    username: "Test"
+  delegate_to: localhost
 """
 import traceback
 
@@ -92,13 +114,15 @@ def main():
     module = AnsibleModule(
         argument_spec=dict(
             passbolt_uri=dict(type='str', required=True, no_log=True),
-            gpgkey=dict(type='str', required=True, no_log=True),
-            passphrase=dict(type='str', required=True, no_log=True),
+            gpgkey=dict(type='str', required=False, no_log=True),
+            passphrase=dict(type='str', required=False, no_log=True),
             name=dict(type='str', required=True),
             users=dict(type='list', elements='str', required=False),
             groups=dict(type='list', elements='str', required=False),
             permission=dict(type='str', required=False, default='Read'),
-            username=dict(type='str', required=False)
+            username=dict(type='str', required=False),
+            fingerprint=dict(type='str', required=False, default=None),
+            verify=dict(type='str', required=False, default=True),
         ),
         supports_check_mode=True,
     )
@@ -114,8 +138,11 @@ def main():
     groups = module.params['groups']
     permission = module.params['permission']
     username = module.params['username']
+    verify = module.params['verify']
+    fingerprint = module.params['fingerprint']
 
-    Passbolt = passbolt(gpgkey, passphrase, passbolt_uri)
+    Passbolt = passbolt(apiurl=passbolt_uri, privatekey=gpgkey, passphrase=passphrase, keyfingerprint=fingerprint,
+                        verify=verify)
 
     response = Passbolt.sharepassword(name, username, users, groups, permission)
     if response == "The operation was successful.":

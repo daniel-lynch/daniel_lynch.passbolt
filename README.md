@@ -29,6 +29,29 @@ Passbolt python module `pip install passbolt`
         msg: "{{ lookup('daniel_lynch.passbolt.get_password', 'Testing', gpgkey=gpgkey, passphrase=passphrase, passbolt_uri=passbolt_uri) }}"
 ```
 
+### Get Password using fingerprint.
+```bash
+#import your private key
+gpg --import private.key
+# Show fingerprint and use it in the playbook
+gpg --fingerprint
+
+```
+
+```yaml
+---
+- hosts: localhost
+  connection: local #with connection local the gpg agent will ask you your private key 
+  vars:
+    passbolt_uri: https://passbolt.djlynch.us
+    fingerprint: "BD12345678F2B05FE32FA07570848FF92005EABC"
+  tasks:
+    - debug:
+        msg: "{{ lookup('daniel_lynch.passbolt.get_password', 'Testing', fingerprint=fingerprint, passbolt_uri=passbolt_uri) }}"
+```
+
+
+
 ### Create User. [Docs](docs/source/modules/create_user.rst)
 ```yaml
 ---

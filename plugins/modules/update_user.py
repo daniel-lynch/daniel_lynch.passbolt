@@ -13,6 +13,7 @@ module: update_user
 short_description: Update user in Passbolt
 description:
     - The Passbolt update user module updates a user in Passbolt via the API.
+    - You either need the gpgkey and the passphrase or the fingerprint of the secret key stored in the gpg-agent.
 author: "Daniel Lynch (@daniel-lynch)"
 options:
   passbolt_uri:
@@ -22,14 +23,22 @@ options:
       - The Passbolt instance Fully Qualified Domain Name(FQDN)
   gpgkey:
     type: str
-    required: true
+    required: false
     description:
       - The GPG Private key used to access Passbolt.
   passphrase:
     type: str
-    required: true
+    required: false
     description:
       - The Passphrase used with the GPG Private key used to access Passbolt.
+  fingerprint:
+    description:
+      - The fingerprint of the imported Private key used to access Passbolt.
+    required: false
+  verify:
+    description:
+      - Whether to verify SSL or not. (Defaults to verify)
+    required: false
   username:
     type: str
     required: true
@@ -64,6 +73,16 @@ EXAMPLES = """
     lastname: "Ing"
     admin: True
   delegate_to: localhost
+
+- name: Update User Using Fingerprint
+  daniel_lynch.passbolt.update_user:
+    passbolt_uri: "https://passbolt.example.com"
+    fingerprint="{{ fingerprint }}"
+    username: "testing@example.com"
+    firstname: "Test"
+    lastname: "Ing"
+    admin: True
+  delegate_to: localhost
 """
 import traceback
 
@@ -82,12 +101,14 @@ def main():
     module = AnsibleModule(
         argument_spec=dict(
             passbolt_uri=dict(type='str', required=True, no_log=True),
-            gpgkey=dict(type='str', required=True, no_log=True),
-            passphrase=dict(type='str', required=True, no_log=True),
+            gpgkey=dict(type='str', required=False, no_log=True),
+            passphrase=dict(type='str', required=False, no_log=True),
             username=dict(type='str', required=True),
             firstname=dict(type='str', required=True),
             lastname=dict(type='str', required=True),
-            admin=dict(type='bool', required=False, default=False)
+            admin=dict(type='bool', required=False, default=False),
+            fingerprint=dict(type='str', required=False, default=None),
+            verify=dict(type='str', required=False, default=True),
         ),
         supports_check_mode=True,
     )
@@ -102,8 +123,11 @@ def main():
     firstname = module.params['firstname']
     lastname = module.params['lastname']
     admin = module.params['admin']
+    verify = module.params['verify']
+    fingerprint = module.params['fingerprint']
 
-    Passbolt = passbolt(gpgkey, passphrase, passbolt_uri)
+    Passbolt = passbolt(apiurl=passbolt_uri, privatekey=gpgkey, passphrase=passphrase, keyfingerprint=fingerprint,
+                        verify=verify)
 
     response = Passbolt.updateuser(username, firstname, lastname, admin)
     if response == "The user has been updated successfully.":
