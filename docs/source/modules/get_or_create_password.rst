@@ -1,7 +1,7 @@
 .. _get_or_create_password_module:
 
 
-create_password -- Create password in Passbolt
+get_or_create_password -- Get or create password in Passbolt
 ==============================================
 
 .. contents::
@@ -97,5 +97,5 @@ Status
 Authors
 ~~~~~~~
 
-- Daniel Lynch (@daniel-lynch)
+- Alban Garrigue (@albang)
 
