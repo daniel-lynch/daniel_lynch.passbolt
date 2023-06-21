@@ -107,7 +107,7 @@ def main():
     verify = module.params['verify']
     fingerprint = module.params['fingerprint']
 
-    Passbolt = passbolt(apiurl=passbolt_uri, privatekey=gpgkey, passphrase=passphrase, keyfingerprint=fingerprint,
+    Passbolt = passbolt(apiurl=passbolt_uri, privatekey=gpgkey, passphrase=passphrase, fingerprint=fingerprint,
                         verify=verify)
 
     response = Passbolt.deletepassword(name, username)
