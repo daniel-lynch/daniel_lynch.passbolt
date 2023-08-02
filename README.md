@@ -7,7 +7,7 @@ Python3.6+ https://www.python.org/downloads/
 
 GnuPG https://gnupg.org/download/index.html
 
-Passbolt python module `pip install passbolt`
+My Python library for passbolt API `pip install git+https://github.com/daniel-lynch/py-passbolt`
 
 
 
