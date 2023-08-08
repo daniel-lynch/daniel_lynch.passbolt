@@ -94,6 +94,7 @@ class LookupModule(LookupBase):
         passphrase = None
         passbolt_uri = None
         username = None
+        fingerprint = None
         verify = True
         return_format = "password"
 
