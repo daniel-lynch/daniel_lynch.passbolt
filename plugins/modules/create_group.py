@@ -122,6 +122,9 @@ def main():
     verify = module.params['verify']
     fingerprint = module.params['fingerprint']
 
+    if type(verify) is str and verify.lower() in ("true", "false"):
+        verify = verify.lower() == "true"
+
     Passbolt = passbolt(apiurl=passbolt_uri, privatekey=gpgkey, passphrase=passphrase, fingerprint=fingerprint,
                         verify=verify)
 
