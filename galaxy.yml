@@ -14,10 +14,10 @@ tags:
   - passbolt
   - password
   - passwords
-repository: https://github.com/daniel-lynch/passbolt
+repository: https://github.com/daniel-lynch/daniel_lynch.passbolt
 #documentation: https://github.com/ansible-collection-migration/community.REPO_NAME/tree/main/docs
-homepage: https://github.com/daniel-lynch/passbolt
-issues: https://github.com/daniel-lynch/passbolt/issues
+homepage: https://github.com/daniel-lynch/daniel_lynch.passbolt
+issues: https://github.com/daniel-lynch/daniel_lynch.passbolt/issues
 build_ignore:
 # https://docs.ansible.com/ansible/devel/dev_guide/developing_collections.html#ignoring-files-and-folders
   - .gitignore
