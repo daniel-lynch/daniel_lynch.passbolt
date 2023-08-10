@@ -2,7 +2,7 @@
 
 namespace: daniel_lynch
 name: passbolt
-version: 0.1.3
+version: 0.1.10
 readme: README.md
 authors:
   - Daniel Lynch (github.com/daniel-lynch)
